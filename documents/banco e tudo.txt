@@ -1,0 +1,45 @@
+cordenador tem conta
+cadastra materias
+ - nome
+ - descricao
+ - horario
+ - token para professor
+
+verifica segunda chamadas
+ - aprova ou recusa
+
+cadastra semestre
+ - descricao
+ - materias vinculadas
+ - token para alunos
+
+
+aluno vai se cadastrar
+nome 
+email
+senha
+telefone
+token
+ - primeiro acesso
+	escolhe as materias que quer fazer de acordo com o horario dado pelo professor
+
+realiza segunda chamada
+ - prova da materia
+ - motivo
+ - arquivo
+
+professor vai se cadastrar
+precisa de um token de acesso
+nome 
+email
+senha
+telefone
+
+cadastra provas realizadas na materia
+ - local
+ - data
+ - nome da prova
+
+ descreve segunda chamada
+ - local da prova
+ - data 
