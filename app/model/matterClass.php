@@ -3,6 +3,7 @@
     require_once PATH_CFG . '/config.php';
     
     class Matter (){
+        private $id;
         private $description;
         private $time;
         private $token;
