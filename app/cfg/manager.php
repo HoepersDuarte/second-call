@@ -116,7 +116,7 @@
 	function consoleLog($msg) {
 		echo ('
 			<script type="text/javascript"> 
-				alert("'.$msg.'"); 
+				console.log("'.$msg.'"); 
 			</script>
 		');
 	}

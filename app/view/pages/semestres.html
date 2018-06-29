@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Webpage</title>
+</head>
+
+<body>
+    <a href="?action=segundasChamadas">segundasChamadas</a>
+    <br>
+    <a href="?action=semestres">semestres</a>
+    <br>
+    <a href="?action=materias">materias</a>
+    <br>
+    <a href="?action=logof">Sair</a>
+    <br>
+    <div>
+        {% if tryCad == 'sim' %} Semestre Cadastrado {% elseif tryCad == 'nao' %} ocoreu um erro {% endif %}
+    </div>
+    {% if type == admin %}
+    <h2>cadastrar semestre </h2>
+    <form action="index.php?action=cadastrarSemestre" method="post">
+        <label>
+            Semestre:
+            <input type="text" name="name" required>
+        </label>
+        <br>
+        <input type="submit" value="enviar">
+    </form>
+    {% endif %}
+
+    <div>
+        {% for half in response %} semestre: {{ half.1 }}
+        <br> {% endfor %}
+    </div>
+
+
+</body>
+
+</html>

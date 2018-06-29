@@ -8,23 +8,24 @@
 <body>
     <h1>My Webpage</h1>
     <form action="index.php?action=logar" method="post">
-        {% if response == 'sim' %}
-        <p>Login efetuado com sucesso!</p>
-        {% elseif response == 'nao' %}
-        <p>email ou senha incorretos!</p>
+        {% if response == 'false' %}
+        <p>Login nao efetuado!</p>
         {% endif %}
         <label>
             email:
             <input type="text" name="email">
         </label>
+        <br>
         <label>
             senha:
             <input type="text" name="password">
         </label>
+        <br>
+
         <input type="submit" value="enviar">
     </form>
 
-    <a href="?action=cadastro">Cadastro</a>
+    <a href="?action=cadastro">cadastro</a>
 </body>
 
 </html>

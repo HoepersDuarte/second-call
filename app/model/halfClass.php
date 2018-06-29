@@ -31,7 +31,7 @@
             }
         }
 
-        function selectHalf() {
+        function findAll() {
             try {
                 $sql = 'SELECT * FROM half WHERE 1';
                 myLog('try selec -> '.$sql);

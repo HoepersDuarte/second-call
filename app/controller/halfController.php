@@ -1,45 +1,58 @@
 <?php
 
-    require_once PATH_APP . '/service/userService.php';
-    require_once PATH_APP . '/model/userClass.php';
+require_once PATH_APP . '/service/halfService.php';
+require_once PATH_APP . '/model/halfClass.php';
 
-    class HalfController {
-        
-        function logar($email, $password) {
-            try {
-                if(!validateEmail($email))
-                    return false;
-                if(!validatePassword($password))
-                    return false;
-        
-                $arrayConts = validateVariables([null,$email,$password,null,null]);
-        
-                $user = new User();
-                $user->construct($arrayConts);
-        
-                $consult = $user->selectLogin();
-                if ($consult && num_rows($consult)) {
-                    $row = fetch($consult);
-                    $token = sha1(date(Y-m));
-                    session_start();
-                    $_SESSION['User.tokenValidate'] = $token;
-                    $_SESSION['User.name'] = $row['name'];
-                    $_SESSION['User.type'] = $row['type'];
-                    return true;
+class HalfController
+{
+
+    public function findHalf()
+    {
+        try {
+
+            $half = new Half();
+
+            $consult = $half->findAll();
+            if ($consult && num_rows($consult) != 0) {
+                $result = [];
+                while ($row = fetch($consult)) {
+                    array_push($result, array($row['idHalf'] , $row['description']));
                 }
 
-                return false;
+                return $result;
             }
-            catch (Exception $e) {
-                throw new Exception("Ocorreu um erro.");
-                return null;
-                exit();
-            }
-        }
 
-        function register($name, $email, $password, $passwordConfirm, $phone, $token) {
-            
+            return false;
+        } //
+        catch (Exception $e) {
+            throw new Exception("Ocorreu um erro.");
+            return null;
+            exit();
         }
     }
 
-?>
+    function register($name) {
+        try {
+
+            $token = criaToken($name);
+
+            $arrayConts = validateVariables([$name, $token]);
+            
+            $half = new Half();
+            $half->construct($arrayConts);
+
+            $consult = $half->insertHalf();
+
+            if ($consult) {
+                return true;
+            }
+
+            return false;
+        } //
+        catch (Exception $e) {
+            throw new Exception("Ocorreu um erro.");
+            return null;
+            exit();
+        }
+    }
+}

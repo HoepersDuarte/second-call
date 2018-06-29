@@ -25,7 +25,7 @@
 
         function selectLogin() {
             try {
-                $sql = 'SELECT * FROM user WHERE email="'.$this->email.'" AND password="'.$this->password.'";';
+                $sql = 'SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="'.$this->email.'" AND password="'.$this->password.'";';
                 myLog('try Select -> '.$sql);
                 $select = querySelect($sql);
                 return $select;   

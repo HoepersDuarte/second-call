@@ -34,10 +34,10 @@
                 exit();
             }
 		}
-		
-		function selectMatter() {
+
+		function findAll() {
 			try {
-				$sql = 'SELECT * FROM matter WHERE 1';
+				$sql = 'SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)';
 				myLog('try selec -> '.$sql);
 				 
 				$select = querySelect($sql);
