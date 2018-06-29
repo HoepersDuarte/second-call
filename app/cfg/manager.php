@@ -93,7 +93,7 @@
  	function valueCheck($value) {
 		if (empty($value))
 			return 0;
-		
+
 		$m = @strtoupper($value);
 		$select = strripos($m, 'SELECT');
 		$update = strripos($m, 'UPDATE');
@@ -101,9 +101,10 @@
 		$drop = strripos($m,'DROP ');
 		$innerjoin = strripos($m, 'INNER JOIN');
 		$outerjoin = strripos($m, 'OUTER JOIN');
-		if (($select == true) || ($update == true) || ($delete == true) || ($innerjoin == true) || ($outerjoin == true) || ($drop == false)) {
+		if (($select == true) || ($update == true) || ($delete == true) || ($innerjoin == true) || ($outerjoin == true) || ($drop == true)) {
 			return 0;
 		}
+
 		if (is_string($value)) {
 			if ($value=="%%")
 				return 0;
@@ -129,8 +130,7 @@
 			
  		}
  		catch (Exception $e) {
- 				consoleLog('Ocorreu um erro ao tentar criar o Log. '.$e->getMessage() );
- 			}
+ 			consoleLog('Ocorreu um erro ao tentar criar o Log. '.$e->getMessage() );
  		}
  	}
  	

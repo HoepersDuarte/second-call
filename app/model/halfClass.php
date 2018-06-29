@@ -3,7 +3,7 @@
     require_once PATH_CFG . '/config.php';
     
     class Half (){
-        private $id;
+        private $idHalf;
         private $description;
         private $token;
 
@@ -12,8 +12,8 @@
             $this->token = $arrayConts[1];
         }
 
-        function setId($arrayConts) {
-            $this->id = $arrayConts[0];
+        function setIdHalf($arrayConts) {
+            $this->idHalf = $arrayConts[0];
             return true;
         }
 
@@ -23,7 +23,7 @@
                 myLog('try selec -> '.$sql);
                  
 				$select = querySelect($sql);
-                return $select;    
+                return $select;
             }
             catch (Exception $e) {
                 throw new Exception("Ocorreu um erro.");
@@ -46,7 +46,7 @@
 
         function updateHalf() {
             try {
-                $sql = 'UPDATE half SET description="'.$this->description.'", token="'.$this->description.'" WHERE idHalf='.$this->id.'';
+                $sql = 'UPDATE half SET description="'.$this->description.'" WHERE idHalf='.$this->idHalf.'';
                 myLog('try Update -> '.$sql);
 				$select = queryInsert($sql);
                 return true;    
@@ -59,7 +59,7 @@
 
         function deleteHalf() {
             try {
-                $sql = 'DELETE FROM half WHERE idHalf='.$this->id.' ';
+                $sql = 'DELETE FROM half WHERE idHalf='.$this->idHalf.' ';
                 myLog('try delete -> '.$sql);
 				$select = queryInsert($sql);
                 return true;    
