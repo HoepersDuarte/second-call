@@ -1,15 +1,15 @@
 <?php
 
-	require_once PATH_CFG . '/config.php';
+    require_once 'app/cfg/manager.php';
 	
-	class Matter (){
+	class Matter {
 		private $idMatter;
 		private $description;
 		private $time;
 		private $token;
 		private $fk_idHalf;
 
-		function __construct($arrayConts) {
+		function construct($arrayConts) {
 			$this->description = $arrayConts[0];
 			$this->time = $arrayConts[1];
 			$this->token = $arrayConts[2];
@@ -21,6 +21,20 @@
 			return true;
 		}
 
+		function findByToken($token) {
+            try {
+                $sql = 'SELECT * FROM half WHERE token='.$token;
+                myLog('try findByToken -> '.$sql);
+                 
+				$select = querySelect($sql);
+                return $select;
+            }
+            catch (Exception $e) {
+                throw new Exception("Ocorreu um erro.");
+                exit();
+            }
+		}
+		
 		function selectMatter() {
 			try {
 				$sql = 'SELECT * FROM matter WHERE 1';

@@ -1,9 +1,8 @@
 <?php
 
-	require_once PATH_APP.'/cfg/routes.php';
-	require_once PATH_APP.'/cfg/maneger.php';
+    require_once 'app/cfg/manager.php';
 	
-	class MetterUser (){
+	class MetterUser {
 		private $MatterUser_idUser;
 		private $MatterUser_idMatter;
 

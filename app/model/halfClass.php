@@ -1,13 +1,13 @@
 <?php
 
-    require_once PATH_CFG . '/config.php';
+    require_once 'app/cfg/manager.php';
     
-    class Half (){
+    class Half {
         private $idHalf;
         private $description;
         private $token;
 
-        function __construct($arrayConts) {
+        function construct($arrayConts) {
             $this->description = $arrayConts[0];
             $this->token = $arrayConts[1];
         }
@@ -15,6 +15,20 @@
         function setIdHalf($arrayConts) {
             $this->idHalf = $arrayConts[0];
             return true;
+        }
+
+        function findByToken($token) {
+            try {
+                $sql = 'SELECT * FROM half WHERE token='.$token;
+                myLog('try findByToken -> '.$sql);
+                 
+				$select = querySelect($sql);
+                return $select;
+            }
+            catch (Exception $e) {
+                throw new Exception("Ocorreu um erro.");
+                exit();
+            }
         }
 
         function selectHalf() {

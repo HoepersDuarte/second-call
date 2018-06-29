@@ -1,0 +1,5 @@
+29-06-2018 00:13:01: try Select -> SELECT * FROM user WHERE email="asdf" AND password="asdf";
+29-06-2018 00:15:13: try Select -> SELECT * FROM user WHERE email="qwer" AND password="qwer";
+29-06-2018 00:15:16: try Select -> SELECT * FROM user WHERE email="asdf" AND password="asdf";
+29-06-2018 00:58:43: try findByToken -> SELECT * FROM half WHERE token=asdf
+29-06-2018 00:58:43: try findByToken -> SELECT * FROM half WHERE token=asdf

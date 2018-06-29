@@ -8,11 +8,10 @@
 <body>
     <h1>My Webpage</h1>
     <form action="index.php?action=logar" method="post">
-        {% if error %}
-        <p>Login nao efetuado!</p>
-        {% endif %} 
-        {% if entrou %}
-        <p>bem vindo !</p>
+        {% if response == 'sim' %}
+        <p>Login efetuado com sucesso!</p>
+        {% elseif response == 'nao' %}
+        <p>email ou senha incorretos!</p>
         {% endif %}
         <label>
             email:

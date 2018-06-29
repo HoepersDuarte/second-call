@@ -1,8 +1,8 @@
 <?php
 
-    require_once PATH_CFG . '/config.php';
+    require_once 'app/cfg/manager.php';
     
-    class Test (){
+    class Test {
         private $idTest;
         private $description;
         private $fk_idMatter;
