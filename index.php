@@ -21,15 +21,21 @@ $twig = new Twig_Environment($loader, array());
 
 $action = isset($_GET['action']) ? $_GET['action'] : null;
 
+$header = $twig->load('requires/header.html');
+$menu = $twig->load('requires/menu.html');
+$footer = $twig->load('requires/footer.html');
+
+$requires = array('header' => $header, 'menu' => $menu, 'footer' => $footer);
+
 ////////// ----> login/cadastro
 if ($action == null || $action == "login") {
     session_destroy();
-    echo $twig->render('login/login.html', array());
+    echo $twig->render('pages/login.html', array('requires' => $requires));
 }
 //
 elseif ($action == "cadastro") {
     session_destroy();
-    echo $twig->render('login/cadastro.html', array('name' => 'cadastro'));
+    echo $twig->render('pages/cadastro.html', array('requires' => $requires));
 }
 //
 elseif ($action == "logar") {
@@ -40,15 +46,16 @@ elseif ($action == "logar") {
     $response = $userController->logar($email, $password);
 
     if ($response != false || $response != null || $response != '') {
-        echo $twig->render('pages/segundasChamadas.html', array('userName' => $_SESSION['name'], 'type' => $_SESSION['type']));
+        $session = array('userName' => $_SESSION['name'], 'userType' => $_SESSION['type']);
+        echo $twig->render('pages/segundasChamadas.html', array('requires' => $requires, 'session' => $session));
     } else {
-        echo $twig->render('login/login.html', array('response' => 'false'));
+        echo $twig->render('pages/login.html', array('requires' => $requires, 'response' => 'false'));
     }
 }
 //
 elseif ($action == "logof") {
     session_destroy();
-    echo $twig->render('login/login.html', array());
+    echo $twig->render('pages/login.html', array('requires' => $requires));
 }
 //
 elseif ($action == "cadastrar") {
@@ -63,10 +70,10 @@ elseif ($action == "cadastrar") {
     $response = $userController->register($name, $email, $password, $passwordConfirm, $phone, $token);
 
     if ($response != false || $response != null || $response != '') {
-        echo $twig->render('login/cadastro.html', array('response' => 'sim'));
+        echo $twig->render('pages/cadastro.html', array('requires' => $requires, 'response' => 'sim'));
     } //
     else {
-        echo $twig->render('login/cadastro.html', array('response' => 'nao'));
+        echo $twig->render('pages/cadastro.html', array('requires' => $requires, 'response' => 'nao'));
     }
 
 }

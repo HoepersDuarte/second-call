@@ -43,7 +43,7 @@
 
         function insertSecondCall() {
             try {
-                $sql = 'INSERT INTO secondcall(description, localFile, status, local, date, fk_idTest, fk_idUser) VALUES ("'$this->description'", "'$this->localFile'", "'$this->status'", "'$this->local'", "'$this->date'", '$this->fk_idTest', '$this->fk_idUser')';
+                $sql = 'INSERT INTO secondcall(description, localFile, status, local, date, fk_idTest, fk_idUser) VALUES ("'.$this->description.'", "'.$this->localFile.'", "'.$this->status.'", "'.$this->local.'", "'.$this->date.'", '.$this->fk_idTest.', '.$this->fk_idUser.')';
                 myLog('try Insert -> '.$sql);
 				$select = queryInsert($sql);
 				return true;    
@@ -56,7 +56,7 @@
 
         function updateSecondCall() {
             try {
-                $sql = 'UPDATE secondcall SET description="'$this->idSecondCall'", localFile="'$this->idSecondCall'", status="'$this->status'", local="'$this->local'", date="'$this->date'" WHERE idSecondCall='$this->idSecondCall'';
+                $sql = 'UPDATE secondcall SET description="'.$this->idSecondCall.'", localFile="'.$this->idSecondCall.'", status="'.$this->status.'", local="'.$this->local.'", date="'.$this->date.'" WHERE idSecondCall='.$this->idSecondCall.'';
                 myLog('try Update -> '.$sql);
 				$select = queryInsert($sql);
                 return true;
@@ -69,7 +69,7 @@
 
         function deleteSecondCall() {
             try {
-                $sql = 'DELETE FROM secondcall WHERE idSecondCall='$this->idSecondCall'';
+                $sql = 'DELETE FROM secondcall WHERE idSecondCall='.$this->idSecondCall.'';
                 myLog('try delete -> '.$sql);
 				$select = queryInsert($sql);
                 return true;

@@ -230,3 +230,10 @@
 29-06-2018 11:16:53: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
 29-06-2018 11:16:53: try selec -> SELECT * FROM half WHERE 1
 29-06-2018 11:16:54: try selec -> SELECT * FROM half WHERE 1
+29-06-2018 21:08:39: try Select -> SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="asdf" AND password="3da541559918a808c2402bba5012f6c60b27661c";
+29-06-2018 21:08:49: try findByToken -> SELECT * FROM half WHERE token=asdf
+29-06-2018 21:08:49: try findByToken -> SELECT * FROM half WHERE token=asdf
+29-06-2018 21:08:57: try Select -> SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="admin@admin" AND password="d033e22ae348aeb5660fc2140aec35850c4da997";
+29-06-2018 21:09:06: try selec -> SELECT * FROM half WHERE 1
+29-06-2018 21:09:07: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+29-06-2018 21:09:07: try selec -> SELECT * FROM half WHERE 1

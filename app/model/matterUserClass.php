@@ -39,7 +39,7 @@
 
 		function deleteMatter() {
 			try {
-				$sql = 'DELETE FROM MetterUser WHERE MatterUser_idUser = '.$this->MatterUser_idUser.' AND MatterUser_idMatter = '$this->MatterUser_idMatter'';
+				$sql = 'DELETE FROM MetterUser WHERE MatterUser_idUser = '.$this->MatterUser_idUser.' AND MatterUser_idMatter = '.$this->MatterUser_idMatter.'';
 				myLog('try delete -> '.$sql);
 				$select = queryInsert($sql);
                 return true;  

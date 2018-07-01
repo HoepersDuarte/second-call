@@ -32,7 +32,7 @@
 
         function insertTest() {
             try {
-                $sql = 'INSERT INTO test (description, fk_idMatter) VALUES ("'$this->description'", '$this->fk_idMatter')';
+                $sql = 'INSERT INTO test (description, fk_idMatter) VALUES ("'.$this->description.'", '.$this->fk_idMatter.')';
                 myLog('try Insert -> '.$sql);
 				$select = queryInsert($sql);
                 return true;
@@ -45,7 +45,7 @@
 
         function updateTest() {
             try {
-                $sql = 'UPDATE test SET description="'$this->description'" WHERE idTest='$this->idTest'';
+                $sql = 'UPDATE test SET description="'.$this->description.'" WHERE idTest='.$this->idTest.'';
                 myLog('try Update -> '.$sql);
 				$select = queryInsert($sql);
                 return true;   
@@ -58,7 +58,7 @@
 
         function deleteTest() {
             try {
-                $sql = 'DELETE FROM test WHERE idTest='$this->idTest'';
+                $sql = 'DELETE FROM test WHERE idTest='.$this->idTest.'';
                 myLog('try delete -> '.$sql);
 				$select = queryInsert($sql);
                 return true;    

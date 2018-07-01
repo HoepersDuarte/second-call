@@ -1,0 +1,6 @@
+01-07-2018 10:29:37: try Select -> SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="admin@admin" AND password="d033e22ae348aeb5660fc2140aec35850c4da997";
+01-07-2018 10:29:40: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 10:29:40: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 10:29:40: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 10:52:25: try Select -> SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="asdf@asdf" AND password="3da541559918a808c2402bba5012f6c60b27661c";
+01-07-2018 11:02:20: try Select -> SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="admin@admin" AND password="d033e22ae348aeb5660fc2140aec35850c4da997";
