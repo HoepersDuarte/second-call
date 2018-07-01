@@ -34,7 +34,7 @@ class MatterController
     {
         try {
 
-            $token = criaToken($name);
+            $token = criaTokenMatter($name);
 
             $arrayConts = validateVariables([$name, $time, $token, $idHalf]);
 

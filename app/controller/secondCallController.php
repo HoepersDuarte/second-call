@@ -1,21 +1,21 @@
 <?php
 
-require_once PATH_APP . '/service/userService.php';
-require_once PATH_APP . '/model/userClass.php';
+require_once PATH_APP . '/service/secondCallService.php';
+require_once PATH_APP . '/model/secondCallClass.php';
 
 class SecondCallController
 {
 
-    public function findMatter()
+    public function findSecondCall()
     {
         try {
 
-            $matter = new Matter();
-            $consult = $matter->findAll();
+            $secondCall = new SecondCall();
+            $consult = $secondCall->findAll();
             if ($consult && num_rows($consult) != 0) {
                 $result = [];
                 while ($row = fetch($consult)) {
-                    array_push($result, array($row['idMatter'], $row['descMatter'], $row['time'], $row['token'], $row['descHalf']));
+                    array_push($result, array($row['idSecondCall'], $row['descSecondCall'], $row['localFile'], $row['status'], $row['local'], $row['date'], $row['descTest'], $row['descMatter']));
                 }
 
                 return $result;
@@ -30,18 +30,67 @@ class SecondCallController
         }
     }
 
-    public function register($name, $time, $idHalf)
+    public function register($description, $idTest, $archive)
     {
         try {
 
-            $token = criaToken($name);
+            $localFile = saveFile($archive);
 
-            $arrayConts = validateVariables([$name, $time, $token, $idHalf]);
+            $arrayConts = validateVariables([$description, $localFile, $idTest, $_SESSION['session']['userId']]);
 
-            $matter = new Matter();
-            $matter->construct($arrayConts);
+            $secondCall = new SecondCall();
+            $secondCall->construct($arrayConts);
 
-            $consult = $matter->insertMatter();
+            $consult = $secondCall->insertSecondCall();
+
+            if ($consult) {
+                return true;
+            }
+
+            return false;
+        } //
+         catch (Exception $e) {
+            throw new Exception("Ocorreu um erro.");
+            return null;
+            exit();
+        }
+    }
+
+    public function approves($id)
+    {
+        try {
+
+            $arrayConts = validateVariables([$id]);
+
+            $secondCall = new SecondCall();
+            $secondCall->setIdSecondCall($arrayConts);
+
+            $consult = $secondCall->approvesSecondCall();
+
+            if ($consult) {
+                return true;
+            }
+
+            return false;
+        } //
+         catch (Exception $e) {
+            throw new Exception("Ocorreu um erro.");
+            return null;
+            exit();
+        }
+    }
+
+    public function disapprove($id)
+    {
+        try {
+            
+
+            $arrayConts = validateVariables([$id]);
+
+            $secondCall = new SecondCall();
+            $secondCall->setIdSecondCall($arrayConts);
+
+            $consult = $secondCall->disapproveSecondCall();
 
             if ($consult) {
                 return true;

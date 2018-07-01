@@ -7,7 +7,7 @@
         private $description;
         private $fk_idMatter;
 
-        function __construct($arrayConts) {
+        function construct($arrayConts) {
             $this->description = $arrayConts[0];
             $this->fk_idMatter = $arrayConts[1];
         }
@@ -17,12 +17,12 @@
             return true;
         }
 
-        function selectTest() {
+        function findAll() {
             try {
-                $sql = 'SELECT * FROM test WHERE 1';
+                $sql = 'SELECT test.idTest, test.description descTest, matter.description descMatter  FROM test INNER JOIN matter ON (test.fk_idMatter = matter.idMatter)';
                 myLog('try Select -> '.$sql);
 				$select = querySelect($sql);
-                return true;
+                return $select;
             }
             catch (Exception $e) {
   				throw new Exception("Ocorreu um erro.");

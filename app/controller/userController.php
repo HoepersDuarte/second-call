@@ -28,7 +28,7 @@ class UserController
             if ($consult && num_rows($consult)) {
                 $row = fetch($consult);
                 $token = sha1(date('Y-m'));
-                $session = array('userName' => $row['name'], 'userType' => $row['description']);
+                $session = array('userId' => $row['idUser'], 'userName' => $row['name'], 'userType' => $row['description']);
                 $_SESSION['session'] = $session;
                 return true;
             }
