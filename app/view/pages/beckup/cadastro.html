@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Webpage</title>
+</head>
+
+<body>
+    <h1>My Webpage</h1>
+    <form action="index.php?action=cadastrar" method="post">
+        {% if response == 'sim' %}
+        <p>Cadastro efetuado com sucesso!</p>
+        {% elseif response == 'nao' %}
+        <p>Cadastro nao efetuado!</p>
+        {% endif %}
+        <label>
+            nome:
+            <input type="text" name="name">
+        </label>
+        <br>
+        <label>
+            email:
+            <input type="text" name="email">
+        </label>
+        <br>
+        <label>
+            senha:
+            <input type="text" name="password">
+        </label>
+        <br>
+        <label>
+            confirma senha:
+            <input type="text" name="passwordConfirm">
+        </label>
+        <br>
+
+        <label>
+            telefone:
+            <input type="text" name="phone">
+        </label>
+        <br>
+        <label>
+            token:
+            <input type="text" name="token">
+        </label>
+        <br>
+
+        <input type="submit" value="enviar">
+    </form>
+
+    <a href="?action=login">Login</a>
+</body>
+
+</html>

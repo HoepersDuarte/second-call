@@ -1,0 +1,28 @@
+html {
+    height: 100%;
+}
+body {
+	padding-top: 20px;
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(to bottom, #006400, #FFFFFF);
+    background-repeat: no-repeat;
+    background-size:100%;
+}
+
+h2{
+	color: #FFFFFF;
+}
+
+#login{
+    color: #006400;
+    font-size: 32px;
+}
+
+label{
+	color: #006400;
+	font-size: 18px;
+}
+.form-control:focus{
+	border-color: #006400;
+}

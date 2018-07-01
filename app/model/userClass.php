@@ -1,15 +1,16 @@
 <?php
-
-    require_once PATH_CFG . '/config.php';
     
-    class User (){
+    require_once 'app/cfg/manager.php';
+
+    class User {
+        private $idUser;
         private $name;
         private $email;
         private $password;
         private $phone;
         private $fk_idTypeUser;
 
-        function __construct($arrayConts) {
+        function construct($arrayConts) {
             $this->name = $arrayConts[0];
             $this->email = $arrayConts[1];
             $this->password = $arrayConts[2];
@@ -17,13 +18,19 @@
             $this->fk_idTypeUser = $arrayConts[4];
         }
 
-        function selectUser() {
-            try {
-            $sql = "SELECT * FROM `user` WHERE 1";
-        return true;    
+        function setIdUser($arrayConts) {
+            $this->idUser = $arrayConts[0];
+            return true;
         }
-        catch (Exception $e) 
-  			{
+
+        function selectLogin() {
+            try {
+                $sql = 'SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="'.$this->email.'" AND password="'.$this->password.'";';
+                myLog('try Select -> '.$sql);
+                $select = querySelect($sql);
+                return $select;   
+            }
+            catch (Exception $e) {
   				throw new Exception("Ocorreu um erro.");
   				exit();
   			}
@@ -31,11 +38,13 @@
 
         function insertUser() {
             try {
-            $sql = "INSERT INTO `user`(`idUser`, `name`, `email`, `password`, `phone`, `fk_idUserType`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6])";
-        return true;    
-        }
-        catch (Exception $e) 
-  			{
+                // $teste = ;
+                $sql = 'INSERT INTO user (name, email, password, phone, fk_idUserType) VALUES ("'.$this->name.'", "'.$this->email.'", "'.$this->password.'", "'.$this->phone.'", "'.$this->fk_idUserType.'")';
+                myLog('try Update -> '.$sql);
+                $select = queryInsert($sql);
+                return true; 
+            }
+            catch (Exception $e) {
   				throw new Exception("Ocorreu um erro.");
   				exit();
   			}
@@ -43,11 +52,12 @@
 
         function updateUser() {
             try {
-            $sql = "UPDATE `user` SET `idUser`=[value-1],`name`=[value-2],`email`=[value-3],`password`=[value-4],`phone`=[value-5],`fk_idUserType`=[value-6] WHERE 1";
-        return true;    
-        }
-        catch (Exception $e) 
-  			{
+                $sql = 'UPDATE user SET name="'.$this->name.'", email="'.$this->email.'", password="'.$this->password.'", phone="'.$this->phone.'" WHERE idUser = '.$this->idUser.'';
+                myLog('try Update -> '.$sql);
+                $select = queryInsert($sql);
+                return true;    
+            }
+            catch (Exception $e) {
   				throw new Exception("Ocorreu um erro.");
   				exit();
   			}
@@ -55,11 +65,12 @@
 
         function deleteUser() {
             try {
-            $sql = "DELETE FROM `user` WHERE 0";
-        return true;    
-        }
-        catch (Exception $e) 
-  			{
+                $sql = 'DELETE FROM user WHERE idUser = '.$this->idUser.'';
+                myLog('try delete -> '.$sql);
+                $select = queryInsert($sql);
+                return true;   
+            }
+            catch (Exception $e) {
   				throw new Exception("Ocorreu um erro.");
   				exit();
   			}
