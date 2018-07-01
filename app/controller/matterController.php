@@ -11,12 +11,11 @@ class MatterController
         try {
 
             $matter = new Matter();
-
             $consult = $matter->findAll();
             if ($consult && num_rows($consult) != 0) {
                 $result = [];
                 while ($row = fetch($consult)) {
-                    array_push($result, array($row['idMatter'], $row['description'], $row['time'], $row['token'], $row['description']));
+                    array_push($result, array($row['idMatter'], $row['descMatter'], $row['time'], $row['token'], $row['descHalf']));
                 }
 
                 return $result;

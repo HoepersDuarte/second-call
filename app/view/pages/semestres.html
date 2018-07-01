@@ -15,9 +15,8 @@
     <a href="?action=logof">Sair</a>
     <br>
     <div>
-        {% if tryCad == 'sim' %} Semestre Cadastrado {% elseif tryCad == 'nao' %} ocoreu um erro {% endif %}
+        {% if response == 'registered' %} Semestre Cadastrado {% elseif response == 'fail' %} ocoreu um erro {% endif %}
     </div>
-    {% if type == admin %}
     <h2>cadastrar semestre </h2>
     <form action="index.php?action=cadastrarSemestre" method="post">
         <label>
@@ -27,10 +26,9 @@
         <br>
         <input type="submit" value="enviar">
     </form>
-    {% endif %}
-
+    <br>
     <div>
-        {% for half in response %} semestre: {{ half.1 }}
+        {% for half in findAll %} semestre: {{ half.1 }} - token: {{ half.2 }}
         <br> {% endfor %}
     </div>
 

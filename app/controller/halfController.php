@@ -11,12 +11,11 @@ class HalfController
         try {
 
             $half = new Half();
-
             $consult = $half->findAll();
             if ($consult && num_rows($consult) != 0) {
                 $result = [];
                 while ($row = fetch($consult)) {
-                    array_push($result, array($row['idHalf'] , $row['description']));
+                    array_push($result, array($row['idHalf'] , $row['description'], $row['token']));
                 }
 
                 return $result;

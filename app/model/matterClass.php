@@ -37,7 +37,7 @@
 
 		function findAll() {
 			try {
-				$sql = 'SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)';
+				$sql = 'SELECT matter.idMatter, matter.description descMatter, matter.time, matter.token, half.description descHalf FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)';
 				myLog('try selec -> '.$sql);
 				 
 				$select = querySelect($sql);

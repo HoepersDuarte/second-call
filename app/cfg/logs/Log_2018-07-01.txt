@@ -4,3 +4,73 @@
 01-07-2018 10:29:40: try selec -> SELECT * FROM half WHERE 1
 01-07-2018 10:52:25: try Select -> SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="asdf@asdf" AND password="3da541559918a808c2402bba5012f6c60b27661c";
 01-07-2018 11:02:20: try Select -> SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="admin@admin" AND password="d033e22ae348aeb5660fc2140aec35850c4da997";
+01-07-2018 11:33:02: try findByToken -> SELECT * FROM half WHERE token=asdf
+01-07-2018 11:33:02: try findByToken -> SELECT * FROM half WHERE token=asdf
+01-07-2018 11:35:57: try Select -> SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="0" AND password="b6589fc6ab0dc82cf12099d1c2d40ab994e8410c";
+01-07-2018 11:36:02: try Select -> SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="asdf@asdf" AND password="3da541559918a808c2402bba5012f6c60b27661c";
+01-07-2018 11:36:06: try Select -> SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="0" AND password="b6589fc6ab0dc82cf12099d1c2d40ab994e8410c";
+01-07-2018 11:36:06: try Select -> SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="0" AND password="b6589fc6ab0dc82cf12099d1c2d40ab994e8410c";
+01-07-2018 11:36:07: try Select -> SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="0" AND password="b6589fc6ab0dc82cf12099d1c2d40ab994e8410c";
+01-07-2018 11:36:10: try Select -> SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="asdf@asdf" AND password="3da541559918a808c2402bba5012f6c60b27661c";
+01-07-2018 11:36:18: try Select -> SELECT * FROM user INNER JOIN usertype ON (usertype.idUserType = user.fk_idUserType) WHERE email="admin@admin" AND password="d033e22ae348aeb5660fc2140aec35850c4da997";
+01-07-2018 11:54:30: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 11:54:30: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 11:54:31: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 11:54:47: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 11:55:01: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 11:55:01: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 11:55:02: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 11:55:10: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 11:55:10: try Insert -> INSERT INTO half(description, token) VALUES ("Semestre 6","03d83819edf6f6d4b71dbe270f1decd7238331de")
+01-07-2018 11:55:13: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:03:36: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:03:36: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:03:36: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:03:37: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:03:37: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:03:37: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:03:38: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:03:38: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:03:39: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:03:40: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:03:40: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:03:50: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:03:50: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:03:51: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:03:51: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:07:20: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:07:20: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:07:21: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:07:21: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:07:21: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:07:21: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:07:22: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:07:22: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:07:22: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:07:22: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:07:33: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:07:33: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:07:33: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:07:34: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:07:34: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:10:20: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:10:20: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:10:21: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:10:22: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:10:22: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:10:49: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:10:49: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:10:50: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:10:51: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:10:51: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:10:55: try selec -> SELECT * FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:10:55: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:18:52: try selec -> SELECT matter.idMatter, matter.description descMatter, matter.time, matter.token, half.description descHalf FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:18:52: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:18:53: try selec -> SELECT matter.idMatter, matter.description descMatter, matter.time, matter.token, half.description descHalf FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:18:53: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:19:22: try Insert -> INSERT INTO matter(description, time, token, fk_idHalf) VALUES ("Estrutura de dados", "36M45", "d50b73d3c801694dac8c3ff78fb40048c4816b4f", 6)
+01-07-2018 12:19:22: try selec -> SELECT matter.idMatter, matter.description descMatter, matter.time, matter.token, half.description descHalf FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:19:27: try selec -> SELECT * FROM half WHERE 1
+01-07-2018 12:19:27: try selec -> SELECT matter.idMatter, matter.description descMatter, matter.time, matter.token, half.description descHalf FROM matter INNER JOIN half ON (half.idHalf=matter.fk_idHalf)
+01-07-2018 12:19:27: try selec -> SELECT * FROM half WHERE 1

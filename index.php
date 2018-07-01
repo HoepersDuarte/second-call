@@ -9,12 +9,6 @@ require_once PATH_APP . '/controller/secondCallController.php';
 require_once PATH_APP . '/controller/testController.php';
 require_once PATH_APP . '/controller/userController.php';
 
-$halfController = new HalfController();
-$matterController = new MatterController();
-$secondCallController = new SecondCallController();
-$testController = new TestController();
-$userController = new UserController();
-
 require_once 'vendor/autoload.php';
 $loader = new Twig_Loader_Filesystem('app/view');
 $twig = new Twig_Environment($loader, array());
@@ -43,13 +37,13 @@ elseif ($action == "logar") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
+    $userController = new UserController();
     $response = $userController->logar($email, $password);
 
     if ($response != false || $response != null || $response != '') {
-        $session = array('userName' => $_SESSION['name'], 'userType' => $_SESSION['type']);
-        echo $twig->render('pages/segundasChamadas.html', array('requires' => $requires, 'session' => $session));
+        echo $twig->render('pages/segundasChamadas.html', array('requires' => $requires, 'session' => $_SESSION['session']));
     } else {
-        echo $twig->render('pages/login.html', array('requires' => $requires, 'response' => 'false'));
+        echo $twig->render('pages/login.html', array('requires' => $requires, 'session' => 'fail'));
     }
 }
 //
@@ -67,30 +61,49 @@ elseif ($action == "cadastrar") {
     $phone = $_POST['phone'];
     $token = $_POST['token'];
 
+    $userController = new UserController();
     $response = $userController->register($name, $email, $password, $passwordConfirm, $phone, $token);
 
     if ($response != false || $response != null || $response != '') {
-        echo $twig->render('pages/cadastro.html', array('requires' => $requires, 'response' => 'sim'));
+        echo $twig->render('pages/login.html', array('requires' => $requires));
     } //
     else {
-        echo $twig->render('pages/cadastro.html', array('requires' => $requires, 'response' => 'nao'));
+        echo $twig->render('pages/cadastro.html', array('requires' => $requires, 'register' => 'fail'));
     }
-
 }
 
-////////// ----> segundasChamadas
-elseif ($action == "segundasChamadas") {
-    echo $twig->render('pages/segundasChamadas.html', array('type' => $_SESSION['type']));
+////////// ----> semestres
+elseif ($action == "semestres") {
+    $halfController = new HalfController();
+    $findAll = $halfController->findHalf();
+    echo $twig->render('pages/semestres.html', array('findAll' => $findAll));
+}
+//
+elseif ($action == "cadastrarSemestre") {
+    $name = $_POST['name'];
+    $response = $halfController->register($name);
+
+    $halfController = new HalfController();
+    $findAll = $halfController->findHalf();
+
+    if ($response != false || $response != null || $response != '') {
+        echo $twig->render('pages/semestres.html', array('response' => 'registered', 'findAll' => $findAll));
+    } //
+    else {
+        echo $twig->render('pages/semestres.html', array('response' => 'fail', 'findAll' => $findAll));
+    }
 }
 
 ////////// ----> materias
 elseif ($action == "materias") {
 
-    $response = $matterController->findMatter();
+    $matterController = new MatterController();
+    $findAll = $matterController->findMatter();
 
-    $responseSelect = $halfController->findHalf();
+    $halfController = new HalfController();
+    $findSelect = $halfController->findHalf();
 
-    echo $twig->render('pages/materias.html', array('response' => $response, 'responseSelect' => $responseSelect));
+    echo $twig->render('pages/materias.html', array('findAll' => $findAll, 'findSelect' => $findSelect));
 }
 //
 elseif ($action == "cadastrarMateria") {
@@ -98,35 +111,23 @@ elseif ($action == "cadastrarMateria") {
     $time = $_POST['time'];
     $idHalf = $_POST['idHalf'];
 
-    $response = $matterController->findMatter();
+    $matterController = new MatterController();
+    $response = $matterController->register($name, $time, $idHalf);
+   
+    $findAll = $matterController->findMatter();
 
-    $responseRes = $matterController->register($name, $time, $idHalf);
-
-    if ($responseRes != false || $responseRes != null || $responseRes != '') {
-        echo $twig->render('pages/materias.html', array('tryCad' => 'sim', 'response' => $response));
+    if ($response != false || $response != null || $response != '') {
+        echo $twig->render('pages/materias.html', array('response' => 'registered', 'findAll' => $findAll));
     } //
     else {
-        echo $twig->render('pages/materias.html', array('tryCad' => 'nao', 'response' => $response));
+        echo $twig->render('pages/materias.html', array('response' => 'fail', 'findAll' => $findAll));
     }
 }
 
-////////// ----> semestres
-elseif ($action == "semestres") {
-    $response = $halfController->findHalf();
-    echo $twig->render('pages/semestres.html', array('response' => $response));
+////////// ----> segundasChamadas
+elseif ($action == "segundasChamadas") {
+    $secondCallController = new SecondCallController;
+    $fildAll = $secondCallController->findSecondCall();
+    echo $twig->render('pages/segundasChamadas.html', array());
 }
-//
-elseif ($action == "cadastrarSemestre") {
-    $response = $halfController->findHalf();
 
-    $name = $_POST['name'];
-
-    $responseRes = $halfController->register($name);
-
-    if ($responseRes != false || $responseRes != null || $responseRes != '') {
-        echo $twig->render('pages/semestres.html', array('tryCad' => 'sim', 'response' => $response));
-    } //
-    else {
-        echo $twig->render('pages/semestres.html', array('tryCad' => 'nao', 'response' => $response));
-    }
-}
