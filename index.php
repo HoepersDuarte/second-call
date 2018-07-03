@@ -41,7 +41,17 @@ elseif ($action == "logar") {
     $response = $userController->logar($email, $password);
 
     if ($response != false || $response != null || $response != '') {
-        echo $twig->render('pages/segundasChamadas.html', array('requires' => $requires, 'session' => $_SESSION['session']));
+        $secondCallController = new SecondCallController;
+        if ($_SESSION['session']['userType'] == 'Admin') {
+            $findAll = $secondCallController->findSecondCallByAdmin();
+        } //
+        elseif ($_SESSION['session']['userType'] == 'Professor') {
+            $findAll = $secondCallController->findSecondCallByTeacher($_SESSION['session']['userId']);
+        } //
+        elseif ($_SESSION['session']['userType'] == 'Aluno') {
+            $findAll = $secondCallController->findSecondCallByStudent($_SESSION['session']['userId']);
+        }
+        echo $twig->render('pages/segundasChamadas.html', array('requires' => $requires, 'findAll' => $findAll, 'session' => $_SESSION['session']));
     } else {
         echo $twig->render('pages/login.html', array('requires' => $requires, 'session' => 'fail'));
     }

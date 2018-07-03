@@ -16,11 +16,11 @@
 		</div>
 	</header>
 
-	<section class="container jumbotron-fluid bg-light shadow p-3 mt-4">
+	<section class="container col-lg-4 bg-light shadow pt-3 mt-4">
 
-		<header class="row text-center mt-3 mb-3">
+		<header class="row text-center p-1">
 			<div class="col">
-				<h2 class="text-dark">LOGIN</h2>
+				<h2 class="text-dark">login</h2>
 			</div>
 		</header>
 		{% if session == 'fail' %}
@@ -30,9 +30,8 @@
 			</div>
 		</div>
 		{% endif %}
-		<article class="row justify-content-center ml-0 mr-0">
-			<div class="col-auto col-sm-12 col-md-8 col-lg-6 col-xl-4">
-
+		<article class="row justify-content-center">
+			<div class="col-auto col-lg-10 m-1">
 				<form action="index.php?action=logar" method="post">
 					<div class="form-group">
 						<input type="text" name="email" class="form-control" placeholder="Usuário" required="required">
@@ -40,8 +39,8 @@
 					<div class="form-group">
 						<input type="password" name="password" class="form-control" placeholder="Senha" required="required">
 					</div>
-					<div class="form-row justify-content-center mb-5">
-						<a href="?action=cadastro" class="btn btn-danger mr-lg-3 mr-md-2 mr-sm-2">Cadastro</a>
+					<div class="form-row justify-content-center m-3">
+						<a href="?action=cadastro" class="btn btn-danger mr-lg-5">Cadastro</a>
 						<button type="submit" class="btn btn-success">Entrar</button>
 					</div>
 				</form>
