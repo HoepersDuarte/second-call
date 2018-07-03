@@ -167,6 +167,14 @@
 		$dateConverted = date('H:i d/m/Y', $dateToConvert);
 		return $dateConverted;
 	}
+
+	function dateForScreen($date) {
+		if($date == null)
+			return null;
+		$dateToConvert = strtotime( $date );
+		$dateConverted = date('d/m/Y', $dateToConvert);
+		return $dateConverted;
+	}
 	
 
 	function numerecMonthToMonth($month) {

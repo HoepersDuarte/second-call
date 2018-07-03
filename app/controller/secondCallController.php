@@ -41,7 +41,8 @@ class SecondCallController
             if ($consult && num_rows($consult) != 0) {
                 $result = [];
                 while ($row = fetch($consult)) {
-                    array_push($result, array($row['idSecondCall'], $row['descSecondCall'], $row['localFile'], $row['status'], $row['local'], $row['date'], $row['descTest'], $row['descMatter']));
+                    $date = dateForScreen($row['date']);
+                    array_push($result, array($row['idSecondCall'], $row['descSecondCall'], $row['localFile'], $row['status'], $row['local'], $date, $row['descTest'], $row['descMatter']));
                 }
 
                 return $result;
@@ -67,7 +68,8 @@ class SecondCallController
             if ($consult && num_rows($consult) != 0) {
                 $result = [];
                 while ($row = fetch($consult)) {
-                    array_push($result, array($row['idSecondCall'], $row['descSecondCall'], $row['localFile'], $row['status'], $row['local'], $row['date'], $row['descTest'], $row['descMatter']));
+                    $date = dateForScreen($row['date']);
+                    array_push($result, array($row['idSecondCall'], $row['descSecondCall'], $row['localFile'], $row['status'], $row['local'], $date, $row['descTest'], $row['descMatter']));
                 }
 
                 return $result;
