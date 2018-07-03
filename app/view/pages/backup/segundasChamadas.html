@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Webpage</title>
+</head>
+
+<body>
+    <a href="?action=segundasChamadas">segundasChamadas</a>
+    <br>
+    <a href="?action=semestres">semestres</a>
+    <br>
+    <a href="?action=materias">materias</a>
+    <br>
+    <a href="?action=provas">provas</a>
+    <br>
+    <a href="?action=logof">Sair</a>
+    <br>
+    <div>
+        {% if response == 'registered' %} Segunda chamada cadastrada {% elseif response == 'fail' %} ocoreu um erro {% endif %}
+    </div>
+    <h2>cadastrar Materia </h2>
+    <form action="index.php?action=cadastrarSegundaChamada" method="post" enctype="multipart/form-data">
+        <label>
+            Motivo:
+            <input type="text" name="description" required>
+        </label>
+        <br>
+        <label>
+            arquivo:
+            <input type="file" name="archive" required>
+        </label>
+        <br>
+        <label>
+            Prova
+            <select name="idTest" required>
+                <option value="">Selecione</option>
+                {% for test in findSelect %}
+                <option value="{{ test.0 }}">{{ test.1 }} - {{ test.2 }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <br>
+        <input type="submit" value="enviar">
+    </form>
+    <br>{% for secondCall in findAll %} <a href="?action=remarcarProva&id={{secondCall.0}}">remarcar prova</a> descSecondCall : {{ secondCall.1 }}, localFile: {{ secondCall.2 }}, status: {{ secondCall.3
+    }}, local: {{ secondCall.4 }}, date: {{ secondCall.5 }} , descTest: {{ secondCall.6 }} , descMatter: {{ secondCall.7
+    }} <a href="?action=aprovarSegundaChamada&id={{secondCall.0}}">Aprovar</a> - <a href="?action=reprovarSegundaChamada&id={{secondCall.0}}">Reprovar</a>
+    <br> {% endfor %}
+    </div>
+
+
+</body>
+
+</html>

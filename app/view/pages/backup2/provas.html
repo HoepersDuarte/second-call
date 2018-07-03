@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Cadastro - Prova</title>
+	{% include requires.header %}
+</head>
+
+<body>
+	<header>
+		{% include requires.menu %}
+	</header>
+
+	<section class="container jumbotron-fluid bg-light shadow p-3 mt-4">
+		<header class="row justify-content-center mt-3 mb-3">
+			<div class="col-auto">
+				<h2 id="login">Cadastrar Prova</h2>
+			</div>
+		</header>
+		<article class="row justify-content-center ml-0 mr-0">
+			<div class="col-sm-12 col-md-10 col-lg-8">
+				<div class="col-md-10 offset-md-1">
+					{% if response == 'fail' %}
+					<div class="alert alert-danger mt-3" role="alert">
+						Falha ao realizar o cadastro.
+					</div>
+					{% elseif response == 'registered' %}
+					<div class="alert alert-success" role="alert">
+						Cadastro realizado com sucesso.
+					</div>
+					{% endif %}
+				</div>
+				<form action="index.php?action=cadastrarProva" method="post">
+					<div class="form-group">
+						<label for="inputNome">Insira o nome da Prova</label>
+						<input type="text" name="name" placeholder="Nome" class="form-control" required>
+					</div>
+					<div class="mt-5 form-group">
+						<label for="inputData">Selecione a materia:</label>
+						<select name="idMatter" required>
+							<option value="">Selecione</option>
+							{% for matter in findSelect %}
+							<option value="{{ matter.0 }}">{{ matter.1 }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="row mt-4 text-center">
+						<div class="col-12">
+							<input type="submit" name="inputCadastro" class="btn btn-success btn-md float-left mb-2" value="CADASTRAR">
+						</div>
+					</div>
+				</form>
+			</div>
+		</article>
+	</section>
+
+	<hr>
+
+	<section class="container jumbotron-fluid bg-light shadow p-3 mt-4">
+		<header class="row justify-content-center mt-3 mb-3">
+			<div class="col-auto">
+				<h2 id="login">Provas Cadastradas</h2>
+			</div>
+		</header>
+		<article class="row justify-content-center ml-0 mr-0">
+			<table class="table table-hover shadow mt-2 text-center">
+				<thead>
+					<tr>
+						<th scope "col">Nome da Prova</th>
+						<th scope "col">Materia</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for test in findAll %}
+					<tr>
+						<td>{{ test.1 }}</td>
+						<td>{{ test.2 }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</article>
+	</section>
+	<footer>
+		{% include requires.footer %}
+	</footer>
+
+</body>
+
+</html>

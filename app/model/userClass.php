@@ -39,8 +39,8 @@
         function insertUser() {
             try {
                 // $teste = ;
-                $sql = 'INSERT INTO user (name, email, password, phone, fk_idUserType) VALUES ("'.$this->name.'", "'.$this->email.'", "'.$this->password.'", "'.$this->phone.'", "'.$this->fk_idUserType.'")';
-                myLog('try Update -> '.$sql);
+                $sql = 'INSERT INTO user (name, email, password, phone, fk_idUserType) VALUES ("'.$this->name.'", "'.$this->email.'", "'.$this->password.'", "'.$this->phone.'", "'.$this->fk_idTypeUser.'")';
+                myLog('try insert User -> '.$sql);
                 $select = queryInsert($sql);
                 return true; 
             }

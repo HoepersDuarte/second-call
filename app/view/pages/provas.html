@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+<html>
 
 <head>
-	<title>Cadastro - Semestre</title>
+	<title>Cadastro - Prova</title>
 	{% include requires.header %}
 </head>
 
@@ -9,10 +10,9 @@
 	{% include requires.menu %}
 
 	<section class="container jumbotron-fluid bg-light shadow p-3 mt-4">
-
 		<header class="row text-center mt-3 mb-3">
 			<div class="col">
-				<h2 class="text-dark">Cadastrar Semestre</h2>
+				<h2 class="text-dark">Cadastrar Prova</h2>
 			</div>
 		</header>
 
@@ -29,14 +29,23 @@
 					</div>
 					{% endif %}
 				</div>
-				<form action="index.php?action=cadastrarSemestre" method="post">
+				<form action="index.php?action=cadastrarProva" method="post">
 					<div class="form-group">
-						<label for="inputNome">Insira o semestre</label>
+						<label for="inputNome">Insira o nome da Prova</label>
 						<input type="text" name="name" placeholder="Nome" class="form-control" required="required" required pattern="[^0-9]+$" maxlength="120"
 						 minlength="3" title="Somente caracteres">
 					</div>
-					<div class="mt-4 text-center">
-						<button type="submit" name="inputCadastro" class="btn btn-success">CADASTRAR</button>
+					<div class="form-group">
+						<label for="inputData">Selecione a materia:</label>
+						<select class="form-control" name="idMatter" required="required">
+							<option value="">Selecione</option>
+							{% for matter in findSelect %}
+							<option value="{{ matter.0 }}">{{ matter.1 }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="text-center">
+						<button type="submit" name="inputCadastro" class="btn btn-success mb-2">CADASTRAR</button>
 					</div>
 				</form>
 			</div>
@@ -54,34 +63,37 @@
 	<section class="container jumbotron-fluid bg-light shadow p-3 mt-4">
 		<header class="row text-center mt-3 mb-3">
 			<div class="col">
-				<h2 class="text-dark">Semestres Cadastrados</h2>
+				<h2 class="text-dark">Provas Cadastradas</h2>
 			</div>
 		</header>
+
 		<article class="row text-center ml-0 mr-0">
 			<div class="table-responsive">
-				<table class="table table-hover mt-2 text-center">
+				<table class="table table-hover mt-2">
 					<thead>
 						<tr>
-							<th scope="col">Semestre</th>
-							<th scope="col">Token</th>
+							<th scope="col">Nome da Prova</th>
+							<th scope="col">Materia</th>
 						</tr>
 					</thead>
 					<tbody>
-						{% for half in findAll %}
+						{% for test in findAll %}
 						<tr>
-							<td>{{ half.1 }}</td>
-							<td>{{ half.2 }}</td>
+							<td>{{ test.1 }}</td>
+							<td>{{ test.2 }}</td>
 						</tr>
 						{% endfor %}
 					</tbody>
 				</table>
 			</div>
 		</article>
+
 	</section>
 
 	<footer>
 		{% include requires.footer %}
 	</footer>
+
 </body>
 
 </html>

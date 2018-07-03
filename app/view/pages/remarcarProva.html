@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Página do Professor</title>
+	{% include requires.header %}
+</head>
+
+<body>
+	{% include requires.menu %}
+
+	<section class="container jumbotron-fluid bg-light shadow p-3 mt-4">
+		<header class="row text-center mt-3 mb-3">
+			<div class="col">
+				<h2 class="text-dark">Remarcar prova</h2>
+			</div>
+		</header>
+
+		<article class="row justify-content-center ml-0 mr-0">
+			<div class="col-sm-12 col-md-10 col-lg-8 col-xl-8">
+				<div class="col-md-10 offset-md-1">
+					{% if responseUpdate == 'fail' %}
+					<div class="alert alert-danger mt-3" role="alert">
+						Falha ao remarcar.
+					</div>
+					{% endif %}
+				</div>
+				<form action="index.php?action=updateSegundaChamada" method="post">
+					<div class="form-row">
+						<div class="form-group col-sm-6">
+							<label for="inputMotivo">Local:</label>
+							<input type="text" class="form-control" name="local" placeholder="Sala" required >
+						</div>
+
+						<div class="form-group col-sm-6">
+							<label for="inputArquivo">Data da prova:</label>
+							<input type="date" class="form-control" name="date" placeholder="date" required="required" required /s>
+						</div>
+					</div>
+					<div class="text-center">
+						<input type="hidden" name="idSecondCall" value="{{ idSecondCall }}">
+						<button type="submit" name="inputCadastro" class="btn btn-success mb-2">ENVIAR</button>
+					</div>
+
+				</form>
+			</div>
+		</article>
+	</section>
+
+	<footer>
+		{% include requires.footer %}
+	</footer>
+
+</body>
+
+</html>

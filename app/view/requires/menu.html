@@ -1,24 +1,36 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
 	<div class="container">
-	
-		<a class="navbar-brand" href="#">Segunda Chamada</a>
+		<a class="navbar-brand">SSC</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="menu">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="#">Inicio</a>
+					<a class="nav-link" href="?action=segundasChamadas">chamadas</a>
 				</li>
+				{% if session.userType == 'Admin' %}
 				<li class="nav-item">
-					<a class="nav-link" href="#">Perfil</a>
+					<a class="nav-link" href="?action=semestres">semestres</a>
 				</li>
-				
+				{% endif %}
+				<li class="nav-item">
+					<a class="nav-link" href="?action=materias">materias</a>
+				</li>
+				{% if session.userType == 'Professor' %}
+				<li class="nav-item">
+					<a class="nav-link" href="?action=provas">provas</a>
+				</li>
+				{% endif %}
 			</ul>
 
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="#">Sair</a>
+					<a class="nav-link" >{{ session.userName }}</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="?action=logof">Sair</a>
 				</li>
 			</ul>
 		</div>

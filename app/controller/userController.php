@@ -28,9 +28,8 @@ class UserController
             if ($consult && num_rows($consult)) {
                 $row = fetch($consult);
                 $token = sha1(date('Y-m'));
-                $_SESSION['tokenValidate'] = $token;
-                $_SESSION['name'] = $row['name'];
-                $_SESSION['type'] = $row['description'];
+                $session = array('userId' => $row['idUser'], 'userName' => $row['name'], 'userType' => $row['description']);
+                $_SESSION['session'] = $session;
                 return true;
             }
 
@@ -78,7 +77,7 @@ class UserController
 
             return false;
         } //
-        catch (Exception $e) {
+         catch (Exception $e) {
             throw new Exception("Ocorreu um erro.");
             return null;
             exit();
