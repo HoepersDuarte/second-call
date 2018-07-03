@@ -2,53 +2,141 @@
 <html>
 
 <head>
-    <title>My Webpage</title>
+	<title>Cadastro - Matéria</title>
+	{% include requires.header %}
 </head>
 
 <body>
-    <a href="?action=segundasChamadas">segundasChamadas</a>
-    <br>
-    <a href="?action=semestres">semestres</a>
-    <br>
-    <a href="?action=materias">materias</a>
-    <br>
-    <a href="?action=logof">Sair</a>
-    <br>
-    <div>
-        {% if tryCad == 'sim' %} Materia Cadastrada {% elseif tryCad == 'nao' %} Ocorreu um erro {% endif %}
-    </div>
-    {% if type == admin %}
-    <h2>cadastrar Materia </h2>
-    <form action="index.php?action=cadastrarMateria" method="post">
-        <label>
-            Materia:
-            <input type="text" name="name" required>
-        </label>
-        <br>
-        <label>
-            horario:
-            <input type="text" name="time" required>
-        </label>
-        <br>
-        <label>
-            Semestre
-            <select name="idHalf">
-                {% for half in responseSelect %}
-                <option value="{{ half.0 }}">{{ half.1 }}</option>
-                {% endfor %}
-            </select>
-        </label>
-        <br>
-        <input type="submit" value="enviar">
-    </form>
-    {% endif %}
+	<!-- Menu -->
+	{% include requires.menu %}
+	<!-- Menu -->
 
-    <div>
-        {% for matter in response %} materia : {{ matter.1 }}, Time: {{ matter.2 }}, Token: {{ matter.3 }}, Semestre:  {{ matter.4 }}
-        <br> {% endfor %}
-    </div>
+	{% if session.userType == 'Admin' %}
+	<section class="container jumbotron-fluid bg-light shadow p-3 mt-4">
 
+		<header class="row text-center mt-3 mb-3">
+			<div class="col">
+				<h2 class="text-dark">Cadastrar Matéria</h2>
+			</div>
+		</header>
 
+		<article class="row justify-content-center ml-0 mr-0 content">
+			<div class="col-auto col-sm-12 col-md-10 col-lg-8 col-xl-8">
+				<!-- Alert -->
+				<div class="col-md-10 offset-md-1">
+					{% if response == 'fail' %}
+					<div class="alert alert-danger mt-3" role="alert">
+						Falha ao realizar o cadastro.
+					</div>
+					{% elseif response == 'registered' %}
+					<div class="alert alert-success" role="alert">
+						Cadastro realizado com sucesso.
+					</div>
+					{% endif %}
+				</div>
+				<form action="index.php?action=cadastrarMateria" method="post">
+					<div class="form-group">
+						<label for="inputMateria">Insira o nome da Matéria</label>
+						<input type="text" name="name" class="form-control" placeholder="Matéria" required="required">
+					</div>
+
+					<div class="form-group">
+						<label for="inputHorario">Insira o Horário</label>
+						<input type="text" name="time" class="form-control" required="required" >
+					</div>
+
+					<div class="form-group">
+						<label for="inputSemestre">Selecione o Semestre</label>
+						<select name="idHalf" class="form-control" required="required">
+							<option value="">Selecione</option>
+							{% for half in findSelect %}
+							<option value="{{ half.0 }}">{{ half.1 }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="text-center">
+						<button type="submit" class="btn btn-success mb-3">CADASTRAR</button>
+					</div>
+				</form>
+
+			</div>
+
+		</article>
+	</section>
+	{% endif %}
+
+	{% if session.userType != 'Admin' %}
+	<section class="container jumbotron-fluid bg-light shadow p-3 mt-4">
+		<header class="row text-center mt-3 mb-3">
+			<div class="col">
+				<h2 class="text-dark">Adcionar materia</h2>
+			</div>
+		</header>
+
+		<article class="row justify-content-center ml-0 mr-0">
+			<div class="col-sm-12 col-md-10 col-lg-8">
+				<div class="col-md-10 offset-md-1">
+					{% if responseAdd == 'fail' %}
+					<div class="alert alert-danger mt-3" role="alert">
+						Falha ao realizar o cadastro.
+					</div>
+					{% elseif responseAdd == 'registered' %}
+					<div class="alert alert-success" role="alert">
+						Cadastro na materia realizado com sucesso.
+					</div>
+					{% endif %}
+				</div>
+				<form action="index.php?action=addMateria" method="post">
+					<div class="form-group">
+						<label for="inputNome">Insira o Token</label>
+						<input type="text" name="token" placeholder="Token" class="form-control" required >
+					</div>
+					<div class="text-center">
+						<button type="submit" name="inputCadastro" class="btn btn-success mb-2">CADASTRAR</button>
+					</div>
+				</form>
+			</div>
+		</article>
+	</section>
+	{% endif %}
+
+	<section class="shadow container bg-light jumbotron-fluid p-3 mt-5">
+
+		<header class="row text-center mt-4">
+			<div class="col">
+				<h2 class="text-dark">Matérias cadastradas</h2>
+			</div>
+		</header>
+
+		<article class="row text-center ml-0 mr-0">
+			<div class="table-responsive">
+				<table class="table table-hover mt-5">
+					<thead>
+						<tr>
+							<th scope="col">Materia</th>
+							<th scope="col">Horário</th>
+							<th scope="col">Token</th>
+							<th scope="col">Semestre</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for matter in findAll %}
+						<tr>
+							<td>{{ matter.1 }}</td>
+							<td>{{ matter.2 }}</td>
+							<td>{{ matter.3 }}</td>
+							<td>{{ matter.4 }}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</article>
+	</section>
+
+	<footer class="footer">
+		{% include requires.footer %}
+	</footer>
 </body>
 
 </html>
