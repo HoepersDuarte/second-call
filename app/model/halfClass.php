@@ -19,10 +19,11 @@
 
         function findByToken($token) {
             try {
-                $sql = 'SELECT * FROM half WHERE token='.$token;
+                $sql = 'SELECT * FROM half WHERE token="'.$token.'"';
                 myLog('try findByToken -> '.$sql);
-                 
-				$select = querySelect($sql);
+                
+                $select = querySelect($sql);
+                
                 return $select;
             }
             catch (Exception $e) {

@@ -1,40 +1,87 @@
 <!DOCTYPE html>
-<html>
 
 <head>
-    <title>My Webpage</title>
+	<title>Cadastro - Semestre</title>
+	{% include requires.header %}
 </head>
 
 <body>
-    <a href="?action=segundasChamadas">segundasChamadas</a>
-    <br>
-    <a href="?action=semestres">semestres</a>
-    <br>
-    <a href="?action=materias">materias</a>
-    <br>
-    <a href="?action=provas">provas</a>
-    <br>
-    <a href="?action=logof">Sair</a>
-    <br>
-    <div>
-        {% if response == 'registered' %} Semestre Cadastrado {% elseif response == 'fail' %} ocoreu um erro {% endif %}
-    </div>
-    <h2>cadastrar semestre </h2>
-    <form action="index.php?action=cadastrarSemestre" method="post">
-        <label>
-            Semestre:
-            <input type="text" name="name" required>
-        </label>
-        <br>
-        <input type="submit" value="enviar">
-    </form>
-    <br>
-    <div>
-        {% for half in findAll %} semestre: {{ half.1 }} - token: {{ half.2 }}
-        <br> {% endfor %}
-    </div>
+	{% include requires.menu %}
 
+	<section class="container jumbotron-fluid bg-light shadow p-3 mt-4">
 
+		<header class="row text-center mt-3 mb-3">
+			<div class="col">
+				<h2 class="text-dark">Cadastrar Semestre</h2>
+			</div>
+		</header>
+
+		<article class="row justify-content-center ml-0 mr-0">
+			<div class="col-sm-12 col-md-10 col-lg-8">
+				<div class="col-md-10 offset-md-1">
+					{% if response == 'fail' %}
+					<div class="alert alert-danger mt-3" role="alert">
+						Falha ao realizar o cadastro.
+					</div>
+					{% elseif response == 'registered' %}
+					<div class="alert alert-success" role="alert">
+						Cadastro realizado com sucesso.
+					</div>
+					{% endif %}
+				</div>
+				<form action="index.php?action=cadastrarSemestre" method="post">
+					<div class="form-group">
+						<label for="inputNome">Insira o semestre</label>
+						<input type="text" name="name" placeholder="Nome" class="form-control" required="required" required pattern="[^0-9]+$" maxlength="120"
+						 minlength="3" title="Somente caracteres">
+					</div>
+					<div class="mt-4 text-center">
+						<button type="submit" name="inputCadastro" class="btn btn-success">CADASTRAR</button>
+					</div>
+				</form>
+			</div>
+		</article>
+	</section>
+
+	<section class="container mt-4">
+		<div class="row">
+			<div class="col-12">
+				<hr>
+			</div>
+		</div>
+	</section>
+
+	<section class="container jumbotron-fluid bg-light shadow p-3 mt-4">
+		<header class="row text-center mt-3 mb-3">
+			<div class="col">
+				<h2 class="text-dark">Semestres Cadastrados</h2>
+			</div>
+		</header>
+		<article class="row text-center ml-0 mr-0">
+			<div class="table-responsive">
+				<table class="table table-hover mt-2 text-center">
+					<thead>
+						<tr>
+							<th scope="col">Semestre</th>
+							<th scope="col">Token</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for half in findAll %}
+						<tr>
+							<td>{{ half.1 }}</td>
+							<td>{{ half.2 }}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</article>
+	</section>
+
+	<footer>
+		{% include requires.footer %}
+	</footer>
 </body>
 
 </html>

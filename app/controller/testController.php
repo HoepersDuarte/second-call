@@ -6,11 +6,13 @@ require_once PATH_APP . '/model/testClass.php';
 class TestController
 {
 
-    public function findTest()
+    public function findTest($idUser)
     {
         try {
 
+            $arrayConts = validateVariables([$idUser]);
             $test = new Test();
+            $test->setIdTest($arrayConts);
             $consult = $test->findAll();
             if ($consult && num_rows($consult) != 0) {
                 $result = [];

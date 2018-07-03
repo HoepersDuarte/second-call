@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Cadastro - Materia</title>
+	{% include requires.header %}
+</head>
+
+<body>
+	<header>
+		{% include requires.menu %}
+	</header>
+
+	<section class="container mt-5">
+		<div class="row justify-content-center">
+			<article class="shadow col-sm-12 col-md-8  container bg-light align-middle jumbotron-fluid pt-4 pb-4">
+				<header class="text-center mt-4 mb-4">
+					<h2 id="login">Cadastro de Matéria</h2>
+				</header>
+				<div class="col-md-10 offset-md-1">
+					{% if response == 'fail' %}
+					<div class="alert alert-danger mt-3" role="alert">
+						Falha ao realizar o cadastro.
+					</div>
+					{% elseif response == 'registered' %}
+					<div class="alert alert-success" role="alert">
+						Cadastro realizado com sucesso.
+					</div>
+					{% endif %}
+				</div>
+				<form class="container col-11" action="index.php?action=cadastrarMateria" method="post">
+					<div class="form-group">
+						<label for="inputNome">Insira o nome da matéria</label>
+						<input type="text" name="name" placeholder="Nome" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label for="inputHora">Insira o Horário</label>
+						<input type="text" name="time" placeholder="Nome" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label for="inputData">Selecione o semestre:</label>
+						<select name="idHalf" class="form-control" required>
+							<option value="">Selecione</option>
+							{% for half in findSelect %}
+							<option value="{{ half.0 }}">{{ half.1 }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="row mt-5 text-center">
+						<div class="col-12">
+							<input type="submit" name="inputCadastro" class="btn btn-success" value="Salvar">
+						</div>
+					</div>
+				</form>
+			</article>
+		</div>
+	</section>
+	<hr>
+	<article class="shadow col-sm-12 col-md-10 container bg-light align-middle jumbotron-fluid pt-4 pb-4">
+		<header class="text-center mt-4 mb-4">
+			<h2 id="login">Materias cadastradas</h2>
+		</header>
+		<table class="table table-striped mt-5">
+			<thead>
+				<tr>
+					<th scope "col">Materia</th>
+					<th scope "col">Horário</th>
+					<th scope "col">Token</th>
+					<th scope "col">Semestre</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for matter in findAll %}
+				<tr>
+					<td>{{ matter.1 }}</td>
+					<td>{{ matter.2 }}</td>
+					<td>{{ matter.3 }}</td>
+					<td>{{ matter.4 }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</article>
+
+	<footer>
+		{% include requires.footer %}
+	</footer>
+</body>
+
+</html>

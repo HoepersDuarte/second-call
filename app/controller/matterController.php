@@ -30,6 +30,33 @@ class MatterController
         }
     }
 
+    public function findMatterByUser($idUser)
+    {
+        try {
+
+            $matter = new Matter();
+            $arrayConts = validateVariables([$idUser]);
+            $matter->setIdMatter($arrayConts);
+            $consult = $matter->findByUser();
+            if ($consult && num_rows($consult) != 0) {
+                $result = [];
+                while ($row = fetch($consult)) {
+                    array_push($result, array($row['idMatter'], $row['descMatter'], $row['time'], $row['token'], $row['descHalf']));
+                }
+
+                return $result;
+            }
+
+            return false;
+        } //
+         catch (Exception $e) {
+            throw new Exception("Ocorreu um erro.");
+            return null;
+            exit();
+        }
+    }
+    
+
     public function register($name, $time, $idHalf)
     {
         try {

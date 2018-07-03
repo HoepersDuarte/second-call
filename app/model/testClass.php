@@ -19,7 +19,7 @@
 
         function findAll() {
             try {
-                $sql = 'SELECT test.idTest, test.description descTest, matter.description descMatter  FROM test INNER JOIN matter ON (test.fk_idMatter = matter.idMatter)';
+                $sql = 'SELECT test.idTest, test.description descTest, matter.description descMatter  FROM test INNER JOIN matter ON (test.fk_idMatter = matter.idMatter) INNER JOIN matteruser ON (matteruser.MatterUser_idMatter=matter.idMatter) WHERE matteruser.MatterUser_idUser = '.$this->idTest.';';
                 myLog('try Select -> '.$sql);
 				$select = querySelect($sql);
                 return $select;

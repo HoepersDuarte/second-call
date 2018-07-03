@@ -1,54 +1,214 @@
 <!DOCTYPE html>
-<html>
 
 <head>
-    <title>My Webpage</title>
+	<title>Página do Cordenador</title>
+	{% include requires.header %}
 </head>
 
 <body>
-    <a href="?action=segundasChamadas">segundasChamadas</a>
-    <br>
-    <a href="?action=semestres">semestres</a>
-    <br>
-    <a href="?action=materias">materias</a>
-    <br>
-    <a href="?action=provas">provas</a>
-    <br>
-    <a href="?action=logof">Sair</a>
-    <br>
-    <div>
-        {% if response == 'registered' %} Segunda chamada cadastrada {% elseif response == 'fail' %} ocoreu um erro {% endif %}
-    </div>
-    <h2>cadastrar Materia </h2>
-    <form action="index.php?action=cadastrarSegundaChamada" method="post" enctype="multipart/form-data">
-        <label>
-            Motivo:
-            <input type="text" name="description" required>
-        </label>
-        <br>
-        <label>
-            arquivo:
-            <input type="file" name="archive" required>
-        </label>
-        <br>
-        <label>
-            Prova
-            <select name="idTest" required>
-                <option value="">Selecione</option>
-                {% for test in findSelect %}
-                <option value="{{ test.0 }}">{{ test.1 }} - {{ test.2 }}</option>
-                {% endfor %}
-            </select>
-        </label>
-        <br>
-        <input type="submit" value="enviar">
-    </form>
-    <br>{% for secondCall in findAll %} <a href="?action=remarcarProva&id={{secondCall.0}}">remarcar prova</a> descSecondCall : {{ secondCall.1 }}, localFile: {{ secondCall.2 }}, status: {{ secondCall.3
-    }}, local: {{ secondCall.4 }}, date: {{ secondCall.5 }} , descTest: {{ secondCall.6 }} , descMatter: {{ secondCall.7
-    }} <a href="?action=aprovarSegundaChamada&id={{secondCall.0}}">Aprovar</a> - <a href="?action=reprovarSegundaChamada&id={{secondCall.0}}">Reprovar</a>
-    <br> {% endfor %}
-    </div>
+	{% include requires.menu %} {% if session.userType == 'Aluno' %}
+	<section class="container jumbotron-fluid bg-light shadow p-3 mt-4">
+		<header class="row text-center mt-3 mb-3">
+			<div class="col">
+				<h2 class="text-dark">Cadastrar Requisição</h2>
+			</div>
+		</header>
 
+		<article class="row justify-content-center ml-0 mr-0">
+			<div class="col-sm-12 col-md-10 col-lg-8 col-xl-8">
+				<div class="col-md-10 offset-md-1">
+					{% if response == 'fail' %}
+					<div class="alert alert-danger mt-3" role="alert">
+						Falha ao realizar o cadastro.
+					</div>
+					{% elseif response == 'registered' %}
+					<div class="alert alert-success" role="alert">
+						Cadastro realizado com sucesso.
+					</div>
+					{% endif %}
+				</div>
+				<form action="index.php?action=cadastrarSegundaChamada" method="post" enctype="multipart/form-data">
+					<div class="form-row">
+						<div class="form-group col-sm-6">
+							<label for="inputMotivo">Descreva o motivo da ausência</label>
+							<input type="text" class="form-control" name="description" placeholder="Motivo" required="required" required pattern="[^0-9]+$"
+							 maxlength="120" minlength="3" title="Somente caracteres">
+						</div>
+
+						<div class="form-group col-sm-6">
+							<label for="inputMateria">Selecione a Prova</label>
+							<select name="idTest" class="form-control" required="required">
+								<option value="">Selecione</option>
+								{% for test in findSelect %}
+								<option value="{{ test.0 }}">{{ test.1 }} - {{ test.2 }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="form-group col-sm-6">
+							<label for="inputArquivo">Submeta um atestado</label>
+							<input type="file" class="form-control form-control-sm" name="archive" placeholder="Atestado" required="required">
+						</div>
+					</div>
+					<div class="text-center">
+						<button type="submit" name="inputCadastro" class="btn btn-success mb-2">ENVIAR</button>
+					</div>
+
+				</form>
+			</div>
+		</article>
+	</section>
+
+	<section class="container mt-4">
+		<div class="row">
+			<div class="col-12">
+				<hr>
+			</div>
+		</div>
+	</section>
+	{% endif %} {% if session.userType == 'Admin' %}
+	<section class="container jumbotron-fluid bg-light shadow p-3 mt-4">
+
+		<header class="row text-center mt-3 mb-3">
+			<div class="col">
+				<h2 class="text-dark">Requisições Pendentes</h2>
+			</div>
+		</header>
+
+		<article class="row text-center ml-0 mr-0">
+			<div class="table-responsive">
+				<table class="table table-hover mt-2">
+					<thead>
+						<tr>
+							<th scope="col">Avaliação</th>
+							<th scope="col">Materia</th>
+							<th scope="col">Motivo</th>
+							<th scope="col">Justificativa</th>
+							<th scope="col">Responder</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for secondCall in findAll %}
+						<tr>
+							<td>{{ secondCall.6 }}</td>
+							<td>{{ secondCall.7 }}</td>
+							<td>{{ secondCall.1 }}</td>
+							<td>
+								<a href="{{ secondCall.2 }}">
+									<img src="app/view/assets/images/arquivo.png" style="height: 30px">
+								</a>
+							</td>
+							<td>
+								<div class="form-row justify-content-center">
+									<a href="?action=aprovarSegundaChamada&id={{secondCall.0}}" type="button" class="btn btn-success">Aceitar</a>
+									<a href="?action=reprovarSegundaChamada&id={{secondCall.0}}" type="button" class="btn btn-danger">Recusar</a>
+								</div>
+							</td>
+						</tr>
+						{% endfor %}
+
+					</tbody>
+				</table>
+			</div>
+		</article>
+	</section>
+	{% endif %} {% if session.userType == 'Professor' %}
+	<section class="container jumbotron-fluid bg-light shadow p-3 mt-4">
+
+		<header class="row text-center mt-3 mb-3">
+			<div class="col">
+				<h2 class="text-dark">Requisições Avaliadas</h2>
+			</div>
+		</header>
+		{% if responseUpdate == 'registered' %}
+		<div class="alert alert-success" role="alert">
+			Prova remarcada com sucesso.
+		</div>
+		{% endif %}
+		<article class="row text-center ml-0 mr-0">
+			<div class="table-responsive">
+				<table class="table table-hover mt-2">
+					<thead>
+						<tr>
+							<th scope="col">Status</th>
+							<th scope="col">Prova</th>
+							<th scope="col">Materia</th>
+							<th scope="col">Data</th>
+							<th scope="col">Local</th>
+							<th scope="col">editar</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for secondCall in findAll %}
+						<tr>
+							<td>
+								{% if secondCall.3 == 3 %}
+								<img src="app/view/assets/images/check.png" style="height: 30px"> {% elseif secondCall.3 == 4 %}
+								<img src="app/view/assets/images/2check.png" style="height: 30px"> {% endif %}
+							</td>
+							<td>{{ secondCall.6 }}</td>
+							<td>{{ secondCall.7 }}</td>
+							<td>{{ secondCall.5 }}</td>
+							<td>{{ secondCall.4 }}</td>
+							<td>
+								<a href="?action=remarcarProva&id={{secondCall.0}}" type="button" class="btn btn-warning ml-2">Editar</a>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</article>
+	</section>
+	{% endif %} {% if session.userType == 'Aluno' %}
+	<section class="container jumbotron-fluid bg-light shadow p-3 mt-4">
+
+		<header class="row text-center mt-3 mb-3">
+			<div class="col">
+				<h2 class="text-dark">Requisições</h2>
+			</div>
+		</header>
+
+		<article class="row text-center ml-0 mr-0">
+			<div class="table-responsive">
+
+				<table class="table table-hover mt-2">
+					<thead>
+						<tr>
+							<th scope "col">Status</th>
+							<!-- <th scope "col">Professor</th> -->
+							<th scope "col">Avaliação</th>
+							<th scope "col">Materia</th>
+							<th scope "col">Data</th>
+							<th scope "col">Local</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for secondCall in findAll %}
+						<tr>
+							<td>
+								{% if secondCall.3 == 1 %}
+								<img src="app/view/assets/images/submit.png" style="height: 30px"> {% elseif secondCall.3 == 2 %}
+								<img src="app/view/assets/images/closed.png" style="height: 30px"> {% elseif secondCall.3 == 3 %}
+								<img src="app/view/assets/images/check.png" style="height: 30px"> {% elseif secondCall.3 == 4 %}
+								<img src="app/view/assets/images/2check.png" style="height: 30px"> {% endif %}
+							</td>
+							<!-- <td>{{ secondCall.8 }}</td> -->
+							<td>{{ secondCall.6 }}</td>
+							<td>{{ secondCall.7 }}</td>
+							<td>{{ secondCall.5 }}</td>
+							<td>{{ secondCall.4 }}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</article>
+	</section>
+	{% endif %}
+
+	<footer>
+		{% include requires.footer %}
+	</footer>
 
 </body>
 

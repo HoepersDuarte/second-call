@@ -24,18 +24,55 @@ class SecondCall
         $this->date = '-';
     }
 
+    public function constructUpdate($arrayConts)
+    {
+        $this->local = $arrayConts[0];
+        $this->date = $arrayConts[1];
+        $this->idSecondCall = $arrayConts[2];
+        $this->status = 4;
+    }
+
     public function setIdSecondCall($arrayConts)
     {
         $this->idSecondCall = $arrayConts[0];
         return true;
     }
 
-    public function findAll()
+    public function findByAdmin()
     {
         try {
-            $sql = 'SELECT secondcall.idSecondCall, secondcall.description descSecondCall, secondcall.localFile, secondcall.status, secondcall.local, secondcall.date, test.description descTest ,matter.description descMatter FROM secondcall INNER JOIN user ON (user.idUser = secondcall.fk_idUser) INNER JOIN test ON (test.idTest = secondcall.fk_idTest) INNER JOIN matter ON (matter.idMatter = test.fk_idMatter)';
+            $sql = 'SELECT secondcall.idSecondCall, secondcall.description descSecondCall, secondcall.localFile, secondcall.status, secondcall.local, secondcall.date, test.description descTest, matter.description descMatter FROM secondcall INNER JOIN test ON (secondcall.fk_idTest=test.idTest) INNER JOIN matter ON (test.fk_idMatter=matter.idMatter) WHERE secondcall.status = 1'; //, user.name INNER JOIN matteruser ON (matter.idMatter=matteruser.MatterUser_idMatter) INNER JOIN user ON (matteruser.MatterUser_idUser=user.idUser)
             myLog('try selec -> ' . $sql);
             $select = querySelect($sql);
+            return $select;
+        } //
+         catch (Exception $e) {
+            throw new Exception("Ocorreu um erro.");
+            exit();
+        }
+    }
+
+    public function findByTeacher()
+    {
+        try {
+            $sql = 'SELECT secondcall.idSecondCall, secondcall.description descSecondCall, secondcall.localFile, secondcall.status, secondcall.local, secondcall.date, test.description descTest, matter.description descMatter FROM secondcall INNER JOIN test ON (secondcall.fk_idTest=test.idTest) INNER JOIN matter ON (test.fk_idMatter=matter.idMatter) INNER JOIN matteruser ON (matteruser.MatterUser_idMatter=matter.idMatter AND matteruser.MatterUser_idUser='.$this->idSecondCall.') WHERE secondcall.status = 3 OR secondcall.status = 4'; //, user.name INNER JOIN matteruser ON (matter.idMatter=matteruser.MatterUser_idMatter) INNER JOIN user ON (matteruser.MatterUser_idUser=user.idUser)
+            myLog('try selec -> ' . $sql);
+            $select = querySelect($sql);
+            return $select;
+        } //
+         catch (Exception $e) {
+            throw new Exception("Ocorreu um erro.");
+            exit();
+        }
+    }
+
+    public function findByStudent()
+    {
+        try {
+            $sql = 'SELECT secondcall.idSecondCall, secondcall.description descSecondCall, secondcall.localFile, secondcall.status, secondcall.local, secondcall.date, test.description descTest, matter.description descMatter FROM secondcall INNER JOIN test ON (secondcall.fk_idTest=test.idTest) INNER JOIN matter ON (test.fk_idMatter=matter.idMatter)  WHERE secondcall.fk_idUser = ' . $this->idSecondCall . ' ;';
+            myLog('try selec -> ' . $sql);
+            $select = querySelect($sql);
+
             return $select;
         } //
          catch (Exception $e) {
@@ -88,8 +125,8 @@ class SecondCall
     public function updateSecondCall()
     {
         try {
-            $sql = 'UPDATE secondcall SET description="' . $this->idSecondCall . '", localFile="' . $this->idSecondCall . '", status="' . $this->status . '", local="' . $this->local . '", date="' . $this->date . '" WHERE idSecondCall=' . $this->idSecondCall . '';
-            myLog('try Update -> ' . $sql);
+            $sql = 'UPDATE secondcall SET status="' . $this->status . '", local="' . $this->local . '", date="' . $this->date . '" WHERE idSecondCall=' . $this->idSecondCall . '';
+            myLog('try updateSecondCall -> ' . $sql);
             $select = queryInsert($sql);
             return true;
         } catch (Exception $e) {
